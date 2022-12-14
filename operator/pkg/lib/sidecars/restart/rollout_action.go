@@ -51,10 +51,34 @@ func rolloutRun(ctx context.Context, k8sclient client.Client, object actionObjec
 		}
 
 		annotations[annotationName] = time.Now().Format(time.RFC3339)
-		obj.SetAnnotations(annotations)
 
-		patch := client.StrategicMergeFrom(obj)
-		return k8sclient.Patch(ctx, obj, patch)
+		switch object.Kind {
+		case "DaemonSet":
+			objcp := obj.DeepCopyObject().(*appsv1.DaemonSet)
+			objcp.SetAnnotations(annotations)
+
+			patch := client.StrategicMergeFrom(obj)
+			return k8sclient.Patch(ctx, objcp, patch)
+		case "Deployment":
+			objcp := obj.DeepCopyObject().(*appsv1.Deployment)
+			objcp.SetAnnotations(annotations)
+
+			patch := client.StrategicMergeFrom(obj)
+			return k8sclient.Patch(ctx, objcp, patch)
+		case "ReplicaSet":
+			objcp := obj.DeepCopyObject().(*appsv1.ReplicaSet)
+			objcp.SetAnnotations(annotations)
+
+			patch := client.StrategicMergeFrom(obj)
+			return k8sclient.Patch(ctx, objcp, patch)
+		case "StatefulSet":
+			objcp := obj.DeepCopyObject().(*appsv1.StatefulSet)
+			objcp.SetAnnotations(annotations)
+
+			patch := client.StrategicMergeFrom(obj)
+			return k8sclient.Patch(ctx, objcp, patch)
+		}
+		return nil
 	})
 
 	if err != nil {
