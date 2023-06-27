@@ -7,7 +7,7 @@ set -o nounset  # treat unset variables as an error and exit immediately.
 set -o errexit  # exit immediately when a command fails.
 set -E          # needs to be set if we want the ERR trap
 set -o pipefail # prevents errors in a pipeline from being masked
-set +x
+set -x
 
 RELEASE_TAG=$1
 
@@ -16,9 +16,7 @@ GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 CHANGELOG_FILE=$(cat CHANGELOG.md)
 RELEASE_NOTES_FILE=$(cat "docs/release-notes/${RELEASE_TAG}.md")
-BODY="${RELEASE_NOTES_FILE}\\n${CHANGELOG_FILE}"
-
-echo "$BODY"
+BODY="${RELEASE_NOTES_FILE}\n${CHANGELOG_FILE}"
 
 JSON_PAYLOAD=$(jq -n \
   --arg tag_name "$RELEASE_TAG" \
