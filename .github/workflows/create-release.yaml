@@ -55,6 +55,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'Publish release'
+#          check-name: test
+          wait-interval: 20
+
       - name: Publish release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
