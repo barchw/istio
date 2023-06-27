@@ -23,4 +23,4 @@ curl -f -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   -H "Content-Type: text/yaml" \
   --data-binary "@manifests.yaml" \
-  "${GITHUB_URL}/releases/${RELEASE_ID}/assets?name=manifests.yaml"
+  ${GITHUB_URL}/releases/${RELEASE_ID}/assets?name=manifests.yaml
