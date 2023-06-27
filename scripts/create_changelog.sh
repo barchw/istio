@@ -20,11 +20,6 @@ then
   LATEST_RELEASE=$(curl -H "${GITHUB_AUTH_HEADER}" -sS "${GITHUB_URL}/releases/latest" | jq -r '.tag_name')
 fi
 
-if [ "${LATEST_RELEASE}"  == "null" ]
-then
-  LATEST_RELEASE="fd45326"
-fi
-
 echo "## Full changelog since ${LATEST_RELEASE}" >> ${CHANGELOG_FILE}
 
 git log ${LATEST_RELEASE}..HEAD --pretty=tformat:"%h" --reverse | while read -r commit
