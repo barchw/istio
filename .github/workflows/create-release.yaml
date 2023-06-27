@@ -7,16 +7,14 @@ on:
         description: 'Create release'
         default: ""
         required: true
+      since:
+        description: 'Changelog since'
+        default: ""
+        required: false
 
 jobs:
-  run-unit-tests:
-    name: Unit tests
-    needs: verify-main-status
-    uses: "./.github/workflows/run-unit-tests.yaml"
-
   create-draft:
     name: Create draft release
-    needs: verify-main-status
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +26,7 @@ jobs:
       - name: Create changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./scripts/create_changelog.sh ${{ github.event.inputs.name }}
+        run: ./scripts/create_changelog.sh ${{ github.event.inputs.name }} ${{ github.event.inputs.since }}
 
       - name: Create draft release
         id: create-draft
@@ -48,7 +46,7 @@ jobs:
 
   publish-release:
     name: Publish release
-    needs: [verify-main-status, create-draft, run-unit-tests]
+    needs: [create-draft]
     runs-on: ubuntu-latest
 
     steps:

@@ -10,7 +10,7 @@ set -o pipefail # prevents errors in a pipeline from being masked
 
 RELEASE_TAG=$1
 
-REPOSITORY=${REPOSITORY:-kyma-project/keda-manager}
+REPOSITORY=${REPOSITORY:-barchw/istio}
 GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 CHANGELOG_FILE="CHANGELOG.md"
@@ -20,7 +20,7 @@ then
   LATEST_RELEASE=$(curl -H "${GITHUB_AUTH_HEADER}" -sS "${GITHUB_URL}/releases/latest" | jq -r '.tag_name')
 fi
 
-echo "## What has changed" >> ${CHANGELOG_FILE}
+echo "## Full changelog since ${LATEST_RELEASE}" >> ${CHANGELOG_FILE}
 
 git log ${LATEST_RELEASE}..HEAD --pretty=tformat:"%h" --reverse | while read -r commit
 do
