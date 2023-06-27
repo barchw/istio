@@ -33,7 +33,7 @@ CURL_RESPONSE=$(curl -L \
   -H "Accept: application/vnd.github+json" \
   -H "${GITHUB_AUTH_HEADER}" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  ${GITHUB_URL}/releases \
+  "${GITHUB_URL}/releases" \
   -d "$JSON_PAYLOAD")
 
-echo "$(echo $CURL_RESPONSE | jq -r ".id")"
+echo "$CURL_RESPONSE" | jq -r ".id"
