@@ -6,7 +6,7 @@ set -o errexit  # exit immediately when a command fails.
 set -E          # needs to be set if we want the ERR trap
 set -o pipefail # prevents errors in a pipeline from being masked
 
-RELEASE_TAG=$1
+RELEASE_ID=$1
 
 IMG="europe-docker.pkg.dev/kyma-project/prod/istio-manager:${RELEASE_TAG}" make generate-manifests
 
