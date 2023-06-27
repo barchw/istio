@@ -25,7 +25,7 @@ then
   LATEST_RELEASE="e8a76138fcb01a634befa1ea273587b4d0e6ad60"
 fi
 
-echo "## What has changed" >> ${CHANGELOG_FILE}
+echo "## Full changelog" >> ${CHANGELOG_FILE}
 
 git log ${LATEST_RELEASE}..HEAD --pretty=tformat:"%h" --reverse | while read -r commit
 do
