@@ -9,11 +9,6 @@ on:
         required: true
 
 jobs:
-  run-unit-tests:
-    name: Unit tests
-    needs: verify-main-status
-    uses: "./.github/workflows/run-unit-tests.yaml"
-
   create-draft:
     name: Create draft release
     needs: verify-main-status
