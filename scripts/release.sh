@@ -42,7 +42,7 @@ echo "Finding release id for: ${PULL_BASE_REF}"
 CURL_RESPONSE=$(curl -w "%{http_code}" -sL \
                 -H "Accept: application/vnd.github+json" \
                 -H "Authorization: Bearer $BOT_GITHUB_TOKEN"\
-                https://api.github.com/repos/kyma-project/istio/releases)
+                https://api.github.com/repos/barchw/istio/releases)
 JSON_RESPONSE=$(sed '$ d' <<< "${CURL_RESPONSE}")
 HTTP_CODE=$(tail -n1 <<< "${CURL_RESPONSE}")
 if [[ "${HTTP_CODE}" != "200" ]]; then
@@ -57,6 +57,6 @@ then
   exit 1
 fi
 
-UPLOAD_URL="https://uploads.github.com/repos/kyma-project/istio/releases/${RELEASE_ID}/assets"
+UPLOAD_URL="https://uploads.github.com/repos/barchw/istio/releases/${RELEASE_ID}/assets"
 
 uploadFile "istio.yaml" "${UPLOAD_URL}?name=istio.yaml"
