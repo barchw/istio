@@ -16,7 +16,7 @@ GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 CHANGELOG_FILE=$(cat CHANGELOG.md)
 RELEASE_NOTES_FILE=$(cat "docs/release-notes/${RELEASE_TAG}.md")
-BODY="${RELEASE_NOTES_FILE}/\n${CHANGELOG_FILE}"
+BODY="${RELEASE_NOTES_FILE}'\n'${CHANGELOG_FILE}"
 
 JSON_PAYLOAD=$(jq -n \
   --arg tag_name "$RELEASE_TAG" \
