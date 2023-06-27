@@ -17,6 +17,7 @@ GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 CHANGELOG_FILE=$(cat CHANGELOG.md)
 RELEASE_NOTES_FILE=$(cat "docs/release-notes/${RELEASE_TAG}.md")
 BODY="${RELEASE_NOTES_FILE}
+
 ${CHANGELOG_FILE}"
 
 JSON_PAYLOAD=$(jq -n \
