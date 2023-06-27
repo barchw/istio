@@ -61,8 +61,8 @@ jobs:
           ref: ${{ github.ref }}
           running-workflow-name: 'Publish release'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          check-name: rel-istio-build
           wait-interval: 20
+          allowed-conclusions: success,skipped,cancelled
 
       - name: Publish release
         env:
