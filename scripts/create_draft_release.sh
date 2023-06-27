@@ -11,7 +11,7 @@ set -x
 
 RELEASE_TAG=$1
 
-REPOSITORY=${REPOSITORY:-barchw/istio}
+REPOSITORY=${REPOSITORY:-kyma-project/istio}
 GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 CHANGELOG_FILE=$(cat CHANGELOG.md)
