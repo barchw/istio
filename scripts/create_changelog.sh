@@ -22,10 +22,10 @@ fi
 
 if [ "${LATEST_RELEASE}"  == "null" ]
 then
-  LATEST_RELEASE="e8a76138fcb01a634befa1ea273587b4d0e6ad60"
+  LATEST_RELEASE="fd45326"
 fi
 
-echo "## Full changelog" >> ${CHANGELOG_FILE}
+echo "## Full changelog since ${LATEST_RELEASE}" >> ${CHANGELOG_FILE}
 
 git log ${LATEST_RELEASE}..HEAD --pretty=tformat:"%h" --reverse | while read -r commit
 do
