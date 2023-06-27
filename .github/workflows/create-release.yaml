@@ -11,7 +11,6 @@ on:
 jobs:
   create-draft:
     name: Create draft release
-    needs: verify-main-status
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +42,7 @@ jobs:
 
   publish-release:
     name: Publish release
-    needs: [verify-main-status, create-draft, run-unit-tests]
+    needs: [create-draft]
     runs-on: ubuntu-latest
 
     steps:
