@@ -22,7 +22,7 @@ fi
 
 if [ "${LATEST_RELEASE}"  == "null" ]
 then
-  LATEST_RELEASE="fd45326"
+  LATEST_RELEASE="e8a76138fcb01a634befa1ea273587b4d0e6ad60"
 fi
 
 echo "## What has changed" >> ${CHANGELOG_FILE}
