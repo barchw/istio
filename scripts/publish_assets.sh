@@ -21,6 +21,6 @@ curl -f -L \
   -H "Accept: application/vnd.github+json" \
   -H "${GITHUB_AUTH_HEADER}" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  -H "Content-Type: text/yaml" \
+  -H "Content-Type: application/octet-stream" \
   --data-binary "@manifests.yaml" \
   ${GITHUB_URL}/releases/${RELEASE_ID}/assets?name=manifests.yaml
