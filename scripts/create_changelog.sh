@@ -20,7 +20,7 @@ then
   LATEST_RELEASE=$(curl -H "${GITHUB_AUTH_HEADER}" -sS "${GITHUB_URL}/releases/latest" | jq -r '.tag_name')
 fi
 
-if [ "${LATEST_RELEASE}"  == "" ]
+if [ "${LATEST_RELEASE}"  == "null" ]
 then
   LATEST_RELEASE="fd45326"
 fi
