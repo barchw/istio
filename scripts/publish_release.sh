@@ -14,7 +14,7 @@ REPOSITORY=${REPOSITORY:-barchw/istio}
 GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 
-curl -L \
+curl -f -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "${GITHUB_AUTH_HEADER}" \
