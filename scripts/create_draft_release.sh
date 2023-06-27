@@ -18,6 +18,8 @@ CHANGELOG_FILE=$(cat CHANGELOG.md)
 RELEASE_NOTES_FILE=$(cat "docs/release-notes/${RELEASE_TAG}.md")
 BODY="${RELEASE_NOTES_FILE}\\n${CHANGELOG_FILE}"
 
+echo "$BODY"
+
 JSON_PAYLOAD=$(jq -n \
   --arg tag_name "$RELEASE_TAG" \
   --arg name "$RELEASE_TAG" \
