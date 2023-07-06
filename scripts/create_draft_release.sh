@@ -10,15 +10,11 @@ set -o pipefail # prevents errors in a pipeline from being masked
 
 RELEASE_TAG=$1
 
-<<<<<<< Updated upstream
 REPOSITORY=${REPOSITORY:-barchw/istio}
-=======
 if ! [[ "$RELEASE_TAG" =~ ^[0-9]\.[0-9]\.[0-9](-.+)?$ ]]; then
     exit 1
 fi
 
-REPOSITORY=${REPOSITORY:-kyma-project/istio}
->>>>>>> Stashed changes
 GITHUB_URL=https://api.github.com/repos/${REPOSITORY}
 GITHUB_AUTH_HEADER="Authorization: Bearer ${GITHUB_TOKEN}"
 CHANGELOG_FILE=$(cat CHANGELOG.md)
