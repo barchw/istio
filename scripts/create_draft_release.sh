@@ -12,6 +12,7 @@ RELEASE_TAG=$1
 
 REPOSITORY=${REPOSITORY:-barchw/istio}
 if ! [[ "$RELEASE_TAG" =~ ^[0-9]\.[0-9]\.[0-9](-.+)?$ ]]; then
+    echo "The tag $RELEASE_TAG is doesn't obey semantic versioning"
     exit 1
 fi
 
