@@ -32,7 +32,7 @@ jobs:
           cluster-name: "test-cluster-1"
           args: >-
             --agents 1
-            --image docker.io/rancher/k3s:v1.27.3-k3s1
+            --image docker.io/rancher/k3s:v1.26.6-k3s1
       - uses: autotelic/action-wait-for-status-check@6556cf50c8fb6608412945382eae73581f56cbb4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
