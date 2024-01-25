@@ -60,7 +60,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: "1.21"
-      - run: make IMG=${{ europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c }} gardener-perf-test
+      - run: make IMG="europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c" gardener-perf-test
         shell: bash
         env:
           GARDENER_KUBECONFIG: "gardener_kubeconfig.yaml"
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: "1.21"
-      - run: make IMG=${{ europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c }} gardener-istio-integration-test
+      - run: make IMG="europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c" gardener-istio-integration-test
         shell: bash
         env:
           GARDENER_KUBECONFIG: "gardener_kubeconfig.yaml"
