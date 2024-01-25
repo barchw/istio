@@ -42,8 +42,8 @@ jobs:
       - uses: ./.github/actions/integration-test
         with:
           operator-image-name: "europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c"
-          servers-memory: "10g"
-          agents: 0
+          servers-memory: "16g"
+          agents: 2
 
   istio-performance-test:
     name: Istio performance test
