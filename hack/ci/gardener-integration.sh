@@ -21,7 +21,4 @@ function cleanup() {
 # Cleanup on exit, be it successful or on fail
 trap cleanup EXIT INT
 
-POST_IMAGE_VERSION=v$(shell date '+%Y%m%d')-$(shell printf %.8s ${PULL_BASE_SHA})
-export IMG=europe-docker.pkg.dev/kyma-project/prod/istio-manager:${POST_IMAGE_VERSION}
-
 make install deploy istio-integration-test
