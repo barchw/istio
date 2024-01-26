@@ -63,7 +63,7 @@ jobs:
       - run: make IMG="europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c" gardener-perf-test
         shell: bash
         env:
-          GARDENER_KUBECONFIG: "gardener_kubeconfig.yaml"
+          GARDENER_KUBECONFIG: "~/gardener_kubeconfig.yaml"
           GARDENER_PROJECT_NAME: "goatz"
           GARDENER_PROVIDER_SECRET_NAME: "goat"
           GARDENER_PROVIDER: "gcp"
@@ -106,7 +106,7 @@ jobs:
       - run: make IMG=${{ europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c }} gardener-istio-integration-test
         shell: bash
         env:
-          GARDENER_KUBECONFIG: "gardener_kubeconfig.yaml"
+          GARDENER_KUBECONFIG: "~/gardener_kubeconfig.yaml"
           GARDENER_PROJECT_NAME: "goatz"
           GARDENER_PROVIDER_SECRET_NAME: "aws-gardener-access"
           GARDENER_PROVIDER: "aws"
@@ -137,7 +137,7 @@ jobs:
       - run: make IMG="europe-docker.pkg.dev/kyma-project/prod/istio-manager:v20240122-fe11aa2c" gardener-istio-integration-test
         shell: bash
         env:
-          GARDENER_KUBECONFIG: "gardener_kubeconfig.yaml"
+          GARDENER_KUBECONFIG: "~/gardener_kubeconfig.yaml"
           GARDENER_PROJECT_NAME: "goatz"
           GARDENER_PROVIDER_SECRET_NAME: "goat"
           GARDENER_PROVIDER: "gcp"
