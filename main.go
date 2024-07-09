@@ -182,5 +182,6 @@ func defineFlagVar() *FlagVar {
 		"Indicates the failure max delay.")
 	flag.DurationVar(&flagVar.reconciliationInterval, "reconciliation-interval", reconciliationIntervalDefault,
 		"Indicates the time based reconciliation interval.")
+
 	return flagVar
 }
