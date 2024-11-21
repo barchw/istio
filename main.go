@@ -16,6 +16,7 @@ limitations under the License.
 
 package main
 
+
 import (
 	"flag"
 	"github.com/kyma-project/istio/operator/internal/reconciliations/istio"
