@@ -76,6 +76,7 @@ Appears in:
 | --- | --- | --- |
 | **affinity** <br /> [Affinity](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.33/#affinity-v1-core) | Defines the Pod scheduling affinity constraints. See [Affinity and anti-affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity). | Optional <br /> |
 | **resources** <br /> [Resources](#resources) | Defines Kubernetes resources' configuration. See [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). | Optional <br /> |
+| **tolerations** <br /> [Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.33/#toleration-v1-core) array | Defines the Pod tolerations. See [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). | Optional <br /> |
 
 ### Components
 

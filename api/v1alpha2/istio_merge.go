@@ -589,6 +589,21 @@ func (i *Istio) mergeResources(op iopv1alpha1.IstioOperator) (iopv1alpha1.IstioO
 			}
 		}
 
+		if i.Spec.Components.Cni.K8S.Tolerations != nil {
+			op.Spec.Components.Cni.Kubernetes.Tolerations = i.Spec.Components.Cni.K8S.Tolerations
+		} else {
+			op.Spec.Components.Cni.Kubernetes.Tolerations = []*corev1.Toleration{
+				{
+					Key:      "CriticalAddonsOnly",
+					Operator: corev1.TolerationOpExists,
+				},
+				{
+					Effect:   corev1.TaintEffectNoExecute,
+					Operator: corev1.TolerationOpExists,
+				},
+			}
+		}
+
 		if i.Spec.Components.Cni.K8S.Resources != nil {
 			if op.Spec.Components.Cni.Kubernetes.Resources == nil {
 				op.Spec.Components.Cni.Kubernetes.Resources = &corev1.ResourceRequirements{}

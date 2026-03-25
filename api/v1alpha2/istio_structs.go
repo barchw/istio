@@ -120,6 +120,9 @@ type CniK8sConfig struct {
 	// Defines Kubernetes resources' configuration. See [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 	// +kubebuilder:validation:Optional
 	Resources *Resources `json:"resources,omitempty"`
+	// Defines the Pod tolerations. See [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+	// +kubebuilder:validation:Optional
+	Tolerations []*corev1.Toleration `json:"tolerations,omitempty"`
 }
 
 // Configures the [HorizontalPodAutoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
