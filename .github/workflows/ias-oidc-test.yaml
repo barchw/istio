@@ -1,6 +1,5 @@
 name: IAS OIDC exchange test
 
-
 # Spike: verify GitHub Actions OIDC -> IAS JWT-bearer trust.
 # Manual dispatch only. Public token exchange (no client secret/cert).
 # Prereqs:
@@ -18,9 +17,10 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: dev          # makes sub = repo:barchw/istio:environment:dev
     env:
       IAS_CLIENT_ID: 8840ec31-969d-4851-819d-ff814a0e4e9b
+      IAS_ISSUER: https://kymagoattest.accounts400.ondemand.com
       IAS_TOKEN_URL: https://kymagoattest.accounts400.ondemand.com/oauth2/token
     steps:
       - name: Mint GitHub OIDC token
@@ -28,7 +28,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const t = await core.getIDToken(process.env.IAS_CLIENT_ID);
+            const t = await core.getIDToken(process.env.IAS_ISSUER);
             core.setSecret(t);
             core.setOutput('token', t);
 
