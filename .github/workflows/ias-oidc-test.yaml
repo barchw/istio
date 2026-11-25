@@ -21,7 +21,7 @@ jobs:
     environment: dev
     env:
       IAS_CLIENT_ID: 8840ec31-969d-4851-819d-ff814a0e4e9b
-      IAS_TOKEN_URL: https://goats.accounts400.ondemand.com/oauth2/token
+      IAS_TOKEN_URL: https://kymagoattest.accounts400.ondemand.com/oauth2/token
     steps:
       - name: Mint GitHub OIDC token
         id: oidc
