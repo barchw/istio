@@ -1,0 +1,56 @@
+name: IAS OIDC exchange test
+
+# Spike: verify GitHub Actions OIDC -> IAS JWT-bearer trust.
+# Manual dispatch only. Public token exchange (no client secret/cert).
+# Prereqs:
+#   - IAS Trust-by-Issuer Subject must match this job's sub claim:
+#     repo:barchw/istio:environment:dev
+#   - a GitHub Environment named "dev" must exist on this repo.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      IAS_CLIENT_ID: 8840ec31-969d-4851-819d-ff814a0e4e9b
+      IAS_TOKEN_URL: https://goats.accounts400.ondemand.com/oauth2/token
+    steps:
+      - name: Mint GitHub OIDC token
+        id: oidc
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const t = await core.getIDToken(process.env.IAS_CLIENT_ID);
+            core.setSecret(t);
+            core.setOutput('token', t);
+
+      - name: Inspect token claims (sub / aud / iss)
+        run: |
+          PAYLOAD=$(printf '%s' '${{ steps.oidc.outputs.token }}' | cut -d. -f2)
+          case $((${#PAYLOAD} % 4)) in 2) PAYLOAD="$PAYLOAD==";; 3) PAYLOAD="$PAYLOAD=";; esac
+          echo "$PAYLOAD" | tr '_-' '/+' | base64 -d 2>/dev/null | jq '{iss,sub,aud}'
+
+      - name: Exchange at IAS (public jwt-bearer)
+        run: |
+          HTTP=$(curl -sS -o resp.json -w '%{http_code}' \
+            -X POST "$IAS_TOKEN_URL" \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer' \
+            --data-urlencode 'client_id='"$IAS_CLIENT_ID" \
+            --data-urlencode 'scope=openid' \
+            --data-urlencode 'assertion=${{ steps.oidc.outputs.token }}')
+          echo "HTTP $HTTP"
+          if jq -e .id_token resp.json >/dev/null 2>&1; then
+            echo "IAS returned id_token - trust works"
+            jq 'del(.id_token,.access_token) + {id_token:"<redacted>",access_token:"<redacted>"}' resp.json
+          else
+            echo "exchange failed:"; cat resp.json
+            exit 1
+          fi
